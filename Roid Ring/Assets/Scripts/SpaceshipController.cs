@@ -8,6 +8,8 @@ public class SpaceshipController : MonoBehaviour
     public int shipForwardThrust = 100;
     public int shipBackwardSpeed  = 200;
     public int shipBackwardThrust = 80;
+    public int shipSideSpeed = 200;
+    public int shipSideThrust = 80;
     public float killSpeed = 0.1f;
 
     private int thrustMultiplier = 20;
@@ -18,37 +20,52 @@ public class SpaceshipController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
-    void Update()
-    {
-
-    }
-
     void FixedUpdate()
     {
-        int genThrust = 0;
+        int vertThrust, horizThrust;
+        vertThrust = horizThrust = 0;
 
         if(Input.GetAxis("Vertical") != 0)
         {
             if(Input.GetAxis("Vertical") > 0)
             {
-                genThrust = shipForwardThrust;
+                vertThrust = shipForwardThrust;
             }
 
             if(Input.GetAxis("Vertical") < 0)
             {
-                genThrust = shipBackwardThrust;
+                vertThrust = shipBackwardThrust;
             }
 
-            rb.AddForce(Vector3.forward * Input.GetAxis("Vertical") * genThrust * thrustMultiplier);
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipForwardSpeed / 3.6f); //.sqrMagnitude
+            rb.AddForce(transform.forward * Input.GetAxis("Vertical") * vertThrust * thrustMultiplier);
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipForwardSpeed / 3.6f);
 
-        }  
-        else
+        }
+        else if(Input.GetAxis("Horizontal") != 0)
         {
-            if(Input.GetAxis("Vertical") == 0)
+            if(Input.GetAxis("Horizontal") > 0)
             {
-                rb.velocity *= killSpeed;
+                horizThrust = shipForwardThrust;
             }
+
+            if(Input.GetAxis("Horizontal") < 0)
+            {
+                horizThrust = shipBackwardThrust;
+            }
+
+            rb.AddForce(-transform.up * Input.GetAxis("Horizontal") * horizThrust * thrustMultiplier);
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipSideSpeed / 3.6f);
+        }
+
+        rb.velocity *= killSpeed;
+
+        if(Input.GetKey(KeyCode.Q))
+        {
+            transform.Rotate(new Vector3(-1, 0, 0));
+        }
+        else if(Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate(new Vector3(1, 0, 0));
         }
     }
 }
