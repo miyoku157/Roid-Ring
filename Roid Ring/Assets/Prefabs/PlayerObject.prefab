@@ -39,6 +39,9 @@ GameObject:
   - component: {fileID: 4663569540835598}
   - component: {fileID: 114696990663834626}
   - component: {fileID: 54804511540490258}
+  - component: {fileID: 114923137089191014}
+  - component: {fileID: 114504880234067268}
+  - component: {fileID: 114399765892989042}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -126,6 +129,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114399765892989042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911031640945738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1050975500, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114504880234067268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911031640945738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114696990663834626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,6 +178,38 @@ MonoBehaviour:
   shipSideSpeed: 200
   shipSideThrust: 80
   killSpeed: 0.98
+--- !u!114 &114923137089191014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911031640945738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 1
+    i1: 82
+    i2: 45
+    i3: 21
+    i4: 97
+    i5: 138
+    i6: 162
+    i7: 164
+    i8: 104
+    i9: 221
+    i10: 235
+    i11: 220
+    i12: 78
+    i13: 203
+    i14: 218
+    i15: 106
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!136 &136826882750517390
 CapsuleCollider:
   m_ObjectHideFlags: 1
