@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class SpaceshipController : MonoBehaviour
+using UnityEngine.Networking;
+public class SpaceshipController : NetworkBehaviour
 {
     public int shipForwardSpeed = 500;
     public int shipForwardThrust = 100;
@@ -22,50 +22,53 @@ public class SpaceshipController : MonoBehaviour
 
     void FixedUpdate()
     {
-        int vertThrust, horizThrust;
-        vertThrust = horizThrust = 0;
-
-        if(Input.GetAxis("Vertical") != 0)
+        if (isLocalPlayer)
         {
-            if(Input.GetAxis("Vertical") > 0)
+            int vertThrust, horizThrust;
+            vertThrust = horizThrust = 0;
+
+            if (Input.GetAxis("Vertical") != 0)
             {
-                vertThrust = shipForwardThrust;
+                if (Input.GetAxis("Vertical") > 0)
+                {
+                    vertThrust = shipForwardThrust;
+                }
+
+                if (Input.GetAxis("Vertical") < 0)
+                {
+                    vertThrust = shipBackwardThrust;
+                }
+
+                rb.AddForce(transform.forward * Input.GetAxis("Vertical") * vertThrust * thrustMultiplier);
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipForwardSpeed / 3.6f);
+
+            }
+            else if (Input.GetAxis("Horizontal") != 0)
+            {
+                if (Input.GetAxis("Horizontal") > 0)
+                {
+                    horizThrust = shipForwardThrust;
+                }
+
+                if (Input.GetAxis("Horizontal") < 0)
+                {
+                    horizThrust = shipBackwardThrust;
+                }
+
+                rb.AddForce(-transform.up * Input.GetAxis("Horizontal") * horizThrust * thrustMultiplier);
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipSideSpeed / 3.6f);
             }
 
-            if(Input.GetAxis("Vertical") < 0)
+            rb.velocity *= killSpeed;
+
+            if (Input.GetKey(KeyCode.Q))
             {
-                vertThrust = shipBackwardThrust;
+                transform.Rotate(new Vector3(-1, 0, 0));
             }
-
-            rb.AddForce(transform.forward * Input.GetAxis("Vertical") * vertThrust * thrustMultiplier);
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipForwardSpeed / 3.6f);
-
-        }
-        else if(Input.GetAxis("Horizontal") != 0)
-        {
-            if(Input.GetAxis("Horizontal") > 0)
+            else if (Input.GetKey(KeyCode.D))
             {
-                horizThrust = shipForwardThrust;
+                transform.Rotate(new Vector3(1, 0, 0));
             }
-
-            if(Input.GetAxis("Horizontal") < 0)
-            {
-                horizThrust = shipBackwardThrust;
-            }
-
-            rb.AddForce(-transform.up * Input.GetAxis("Horizontal") * horizThrust * thrustMultiplier);
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipSideSpeed / 3.6f);
-        }
-
-        rb.velocity *= killSpeed;
-
-        if(Input.GetKey(KeyCode.Q))
-        {
-            transform.Rotate(new Vector3(-1, 0, 0));
-        }
-        else if(Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(new Vector3(1, 0, 0));
         }
     }
 }
