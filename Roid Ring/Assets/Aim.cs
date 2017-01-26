@@ -7,12 +7,13 @@ public class Aim : MonoBehaviour {
     Rect position;
 	// Use this for initialization
 	void Start () {
+        Cursor.visible = false;
         crosshair=Resources.Load<Texture2D>("eotech_a65_popup");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        position = new Rect(Input.mousePosition.x-(crosshair.width/2), -(Input.mousePosition.y- (crosshair.height / 2)), crosshair.width, crosshair.height);
+        position = new Rect(Input.mousePosition.x-(crosshair.width/2), -(Input.mousePosition.y- crosshair.height), crosshair.width, crosshair.height);
 	}
 
     private void OnGUI()
