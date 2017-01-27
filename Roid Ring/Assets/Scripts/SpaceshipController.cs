@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+
 public class SpaceshipController : NetworkBehaviour
 {
     public int shipForwardSpeed = 500;
@@ -22,12 +23,12 @@ public class SpaceshipController : NetworkBehaviour
 
     void FixedUpdate()
     {
-        if (isLocalPlayer)
+        if(isLocalPlayer)
         {
             int vertThrust, horizThrust;
             vertThrust = horizThrust = 0;
 
-            if (Input.GetAxis("Vertical") != 0)
+            if(Input.GetAxis("Vertical") != 0)
             {
                 if (Input.GetAxis("Vertical") > 0)
                 {
@@ -43,7 +44,7 @@ public class SpaceshipController : NetworkBehaviour
                 rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipForwardSpeed / 3.6f);
 
             }
-            else if (Input.GetAxis("Horizontal") != 0)
+            if(Input.GetAxis("Horizontal") != 0)
             {
                 if (Input.GetAxis("Horizontal") > 0)
                 {
@@ -55,19 +56,19 @@ public class SpaceshipController : NetworkBehaviour
                     horizThrust = shipBackwardThrust;
                 }
 
-                rb.AddForce(-transform.up * Input.GetAxis("Horizontal") * horizThrust * thrustMultiplier);
+                rb.AddForce(transform.right * Input.GetAxis("Horizontal") * horizThrust * thrustMultiplier);
                 rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipSideSpeed / 3.6f);
             }
 
             rb.velocity *= killSpeed;
 
-            if (Input.GetKey(KeyCode.Q))
+            if(Input.GetKey(KeyCode.Q))
             {
-                transform.Rotate(new Vector3(-1, 0, 0));
+                transform.Rotate(new Vector3(0, -1, 0));
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if(Input.GetKey(KeyCode.D))
             {
-                transform.Rotate(new Vector3(1, 0, 0));
+                transform.Rotate(new Vector3(0, 1, 0));
             }
         }
     }
