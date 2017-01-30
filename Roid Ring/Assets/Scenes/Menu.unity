@@ -614,8 +614,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1025728563}
   - component: {fileID: 1025728562}
-  - component: {fileID: 1025728564}
   - component: {fileID: 1025728565}
+  - component: {fileID: 1025728564}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -655,7 +655,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1025728561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ae8f711597a7204aa5f04d7707fc9cb, type: 3}
+  m_Script: {fileID: 227461547, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  showGUI: 1
+  offsetX: 0
+  offsetY: 0
+--- !u!114 &1025728565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1025728561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -822479833, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
@@ -667,13 +682,14 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1911031640945738, guid: 01522d15618aa2a468ddebdc4ecbda6a,
+  m_PlayerPrefab: {fileID: 1240821811874414, guid: bd4dacbd8bcb50a488369d5ca69160e2,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
-  m_OfflineScene: Main
+  m_OfflineScene: 
   m_OnlineScene: Main
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 1306247165513812, guid: d6cb624231fbd7f41ba289fe2e0a66c2, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -703,7 +719,7 @@ MonoBehaviour:
     m_ReactorMaximumReceivedMessages: 1024
     m_ReactorMaximumSentMessages: 1024
     m_MaxPacketSize: 2000
-  m_Channels: 0500000000000000
+  m_Channels: 
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
@@ -716,28 +732,6 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
-  playerMax: 2
---- !u!114 &1025728565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1025728561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c947a712c44efd3458964e5d100f860e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BroadcastPort: 47777
-  m_BroadcastKey: 2222
-  m_BroadcastVersion: 1
-  m_BroadcastSubVersion: 1
-  m_BroadcastInterval: 1000
-  m_UseNetworkManager: 1
-  m_BroadcastData: HELLO
-  m_ShowGUI: 1
-  m_OffsetX: 0
-  m_OffsetY: 0
 --- !u!1 &1046650140
 GameObject:
   m_ObjectHideFlags: 0

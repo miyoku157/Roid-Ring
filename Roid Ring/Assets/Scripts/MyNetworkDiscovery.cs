@@ -13,7 +13,9 @@ public class MyNetworkDiscovery : NetworkDiscovery {
     public override void OnReceivedBroadcast(string fromAddress, string data)
     {
         StopBroadcast();
-        SceneManager.LoadScene("Main");
+       // SceneManager.LoadScene("Main");
+       
+    
         NetworkManager.singleton.networkAddress = fromAddress;
         NetworkManager.singleton.StartClient();
     }
