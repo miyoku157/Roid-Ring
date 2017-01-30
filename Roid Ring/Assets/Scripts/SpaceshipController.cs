@@ -17,14 +17,17 @@ public class SpaceshipController : NetworkBehaviour
     private int thrustMultiplier = 20;
     private Rigidbody rb;
     private Camera cam;
+
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        cam =transform.GetChild(2).GetComponent<Camera>();
-        if (isLocalPlayer)
+        cam = transform.GetChild(2).GetComponent<Camera>();
+
+        if(isLocalPlayer)
         {
             cam.enabled = true;
-        }else
+        }
+        else
         {
             cam.enabled = false;
         }
@@ -32,6 +35,7 @@ public class SpaceshipController : NetworkBehaviour
 
     void FixedUpdate()
     {
+        cam.transform.rotation = Quaternion.Euler(90, 0, 0);
         transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
 
         if(isLocalPlayer)
