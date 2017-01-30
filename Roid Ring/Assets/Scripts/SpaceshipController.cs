@@ -15,7 +15,7 @@ public class SpaceshipController : NetworkBehaviour
 
     private int thrustMultiplier = 20;
     private Rigidbody rb;
-
+    
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();

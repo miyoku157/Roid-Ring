@@ -13,8 +13,16 @@ public class WeaponController : MonoBehaviour
     
     void Start ()
     {
-
-	}
+        if (transform.root.GetComponent<SpaceshipController>().isLocalPlayer)
+        {
+            enabled = true;
+        }
+        else
+        {
+            enabled = false;
+        }
+    
+}
 	
 	void Update ()
     {
