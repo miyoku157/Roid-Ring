@@ -13,9 +13,10 @@ public class SpaceshipController : NetworkBehaviour
     public int shipSideThrust = 80;
     public float killSpeed = 0.1f;
 
+    public GameObject projectile;
     private int thrustMultiplier = 20;
     private Rigidbody rb;
-    
+
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -71,5 +72,17 @@ public class SpaceshipController : NetworkBehaviour
                 transform.Rotate(new Vector3(0, 1, 0));
             }
         }
+    }
+
+    [Command]
+    public void CmdSpawn(GameObject temp)
+    {
+            temp = Instantiate(projectile);
+            temp.transform.position = transform.GetChild(1).GetChild(0).position;
+            /*Rigidbody rb2 = temp.GetComponent<Rigidbody>();
+            rb2.velocity += transform.GetChild(1).GetChild(0).forward * 300;
+            rb2.AddForce(transform.GetChild(1).GetChild(0).forward * 300,ForceMode.Impulse);*/
+            NetworkServer.Spawn(temp);
+            Destroy(temp, 5.0f);
     }
 }

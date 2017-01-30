@@ -1,19 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class WeaponController : MonoBehaviour
 {
     public GameObject projectile;
     public GameObject testCube;
-
+    SpaceshipController sc;
     Vector3 mouse_pos, object_pos;
     Vector2 offset;
     float angle, parentAngle;
-    
     void Start ()
     {
-        if (transform.root.GetComponent<SpaceshipController>().isLocalPlayer)
+        sc = transform.root.GetComponent<SpaceshipController>();
+        if (sc.isLocalPlayer)
         {
             enabled = true;
         }
@@ -42,10 +43,9 @@ public class WeaponController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            GameObject temp = Instantiate(projectile);
-            temp.transform.position = transform.GetChild(0).position;
-            temp.GetComponent<Rigidbody>().AddForce(transform.GetChild(0).forward * 300);
-            Destroy(temp, 5f);
+            GameObject temp= null;
+            sc.CmdSpawn(temp);
         }
     }
+    
 }
