@@ -108,7 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4717296ae81ad409cd1f643278a749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  maxHull: 100
+  maxShield: 50
+  shieldRechargeRate: 1
   isPlayer: 0
 --- !u!135 &135890118971227496
 SphereCollider:
