@@ -16,10 +16,18 @@ public class SpaceshipController : NetworkBehaviour
     public GameObject projectile;
     private int thrustMultiplier = 20;
     private Rigidbody rb;
-
+    private Camera cam;
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        cam =transform.GetChild(2).GetComponent<Camera>();
+        if (isLocalPlayer)
+        {
+            cam.enabled = true;
+        }else
+        {
+            cam.enabled = false;
+        }
     }
 
     void FixedUpdate()
