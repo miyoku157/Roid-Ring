@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    public Transform turretTr;
     public GameObject projectile;
+    public GameObject testCube;
 
-    Vector3 mouse_pos;
-    Vector3 object_pos;
-    float angle;
+    Vector3 mouse_pos, object_pos;
+    Vector2 offset;
+    float angle, parentAngle;
     
     void Start ()
     {
@@ -18,23 +18,26 @@ public class WeaponController : MonoBehaviour
 	
 	void Update ()
     {
-        /*var mousePos = Input.mousePosition;
-        Debug.Log(mousePos);
-        //mousePos.y = Camera.main.transform.position.y;
-        var mouseWorld = Camera.main.ScreenToWorldPoint(mousePos);
-        Debug.Log(mouseWorld);
-        var offset = new Vector3(mousePos.x - mouseWorld.x, 0, mousePos.z - mouseWorld.z);
-        var angle = Mathf.Atan2(offset.z, offset.x) * Mathf.Rad2Deg;
-        transform.GetChild(0).localRotation = Quaternion.Euler((angle), 0, 0);
+        mouse_pos = Input.mousePosition;
+        mouse_pos.z = 25;
+        object_pos = Camera.main.WorldToScreenPoint(transform.position);
 
-        Debug.DrawLine(Camera.main.transform.position, transform.GetChild(0).position, Color.red, 0.5f);
-        Debug.DrawLine(Camera.main.transform.position, mouseWorld, Color.blue, 0.5f);*/
+        // Test cube movement
+        if(testCube != null)
+            testCube.transform.position = Camera.main.ScreenToWorldPoint(mouse_pos);
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        offset = new Vector2(mouse_pos.x - object_pos.x, mouse_pos.y - object_pos.y);
+        angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
+        parentAngle = transform.root.eulerAngles.y;
+
+        transform.localRotation = Quaternion.Euler(-90, -180, -angle + 90 - parentAngle);
+
+        if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             GameObject temp = Instantiate(projectile);
-            temp.transform.position = transform.position;
-            temp.GetComponent<Rigidbody>().AddForce(transform.forward * 150);
+            temp.transform.position = transform.GetChild(0).position;
+            temp.GetComponent<Rigidbody>().AddForce(transform.GetChild(0).forward * 300);
+            Destroy(temp, 5f);
         }
     }
 }
