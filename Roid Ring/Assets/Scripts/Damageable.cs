@@ -25,4 +25,9 @@ public class Damageable : MonoBehaviour
             Destroy(coll.gameObject);
         }
     }
+
+    public int getHealth()
+    {
+        return health;
+    }
 }

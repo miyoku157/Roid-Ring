@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 135890118971227496}
   - component: {fileID: 114029720490434548}
   m_Layer: 0
-  m_Name: Asteroide
+  m_Name: Roid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

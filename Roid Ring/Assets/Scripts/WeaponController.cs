@@ -6,17 +6,21 @@ public class WeaponController : MonoBehaviour
 {
     public GameObject projectile;
     public GameObject testCube;
-    public int projectileSpeed = 450;
+    public int projectileSpeed = 600;
+    public int energyRecoverySpeed = 1;
+    public float firingCooldpwn = 0.20f;
 
     Vector3 mouse_pos, object_pos;
     Vector2 offset;
-    float angle, parentAngle;
+    private float angle, parentAngle, timeToCooldown;
+    private int energy;
     
     void Start ()
     {
         if(transform.root.GetComponent<SpaceshipController>().isLocalPlayer)
         {
             testCube = GameObject.Find("Cube");
+            StartCoroutine("EnergyRecovery");
             enabled = true;
         }
         else
@@ -41,12 +45,36 @@ public class WeaponController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(-90, -180, -angle + 90 - parentAngle);
 
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetKey(KeyCode.Mouse0) && energy > 5 && timeToCooldown <= 0)
         {
             GameObject temp = Instantiate(projectile);
             temp.transform.position = transform.GetChild(0).position;
             temp.GetComponent<Rigidbody>().AddForce(transform.GetChild(0).forward * projectileSpeed);
+            energy -= 5;
             Destroy(temp, 3f);
+            timeToCooldown = firingCooldpwn;
         }
+        else
+        {
+            timeToCooldown -= Time.deltaTime;
+        }
+    }
+
+    IEnumerator EnergyRecovery()
+    {
+        while(true)
+        {
+            if(energy < 100)
+            {
+                energy += 1;
+            }
+
+            yield return new WaitForSeconds(1 / energyRecoverySpeed / 6.66f);
+        }
+    }
+
+    public int getEnergy()
+    {
+        return energy;
     }
 }
