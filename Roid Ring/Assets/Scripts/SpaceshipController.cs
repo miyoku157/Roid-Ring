@@ -42,8 +42,8 @@ public class SpaceshipController : NetworkBehaviour
 
                 rb.AddForce(transform.forward * Input.GetAxis("Vertical") * vertThrust * thrustMultiplier);
                 rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipForwardSpeed / 3.6f);
-
             }
+
             if(Input.GetAxis("Horizontal") != 0)
             {
                 if (Input.GetAxis("Horizontal") > 0)

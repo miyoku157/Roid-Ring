@@ -6,6 +6,7 @@ public class WeaponController : MonoBehaviour
 {
     public GameObject projectile;
     public GameObject testCube;
+    public int projectileSpeed = 450;
 
     Vector3 mouse_pos, object_pos;
     Vector2 offset;
@@ -13,16 +14,16 @@ public class WeaponController : MonoBehaviour
     
     void Start ()
     {
-        if (transform.root.GetComponent<SpaceshipController>().isLocalPlayer)
+        if(transform.root.GetComponent<SpaceshipController>().isLocalPlayer)
         {
+            testCube = GameObject.Find("Cube");
             enabled = true;
         }
         else
         {
             enabled = false;
         }
-    
-}
+    }
 	
 	void Update ()
     {
@@ -44,8 +45,8 @@ public class WeaponController : MonoBehaviour
         {
             GameObject temp = Instantiate(projectile);
             temp.transform.position = transform.GetChild(0).position;
-            temp.GetComponent<Rigidbody>().AddForce(transform.GetChild(0).forward * 300);
-            Destroy(temp, 5f);
+            temp.GetComponent<Rigidbody>().AddForce(transform.GetChild(0).forward * projectileSpeed);
+            Destroy(temp, 3f);
         }
     }
 }
