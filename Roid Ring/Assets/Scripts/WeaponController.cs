@@ -52,7 +52,6 @@ public class WeaponController : MonoBehaviour
         {
             sc.CmdSpawn();
             energy -= 5;
-            Destroy(temp, 3f);
             timeToCooldown = firingCooldpwn;
         }
         else

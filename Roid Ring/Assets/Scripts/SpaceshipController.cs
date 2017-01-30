@@ -79,12 +79,10 @@ public class SpaceshipController : NetworkBehaviour
     [Command]
     public void CmdSpawn()
     {
-            GameObject temp = Instantiate(projectile);
-            temp.transform.position = transform.GetChild(1).GetChild(0).position;
-            /*Rigidbody rb2 = temp.GetComponent<Rigidbody>();
-            rb2.velocity += transform.GetChild(1).GetChild(0).forward * 300;
-            rb2.AddForce(transform.GetChild(1).GetChild(0).forward * 300,ForceMode.Impulse);*/
-            NetworkServer.Spawn(temp);
-            Destroy(temp, 5.0f);
+        GameObject temp = Instantiate(projectile);
+        temp.transform.position = transform.GetChild(1).GetChild(0).position;
+        temp.transform.rotation = Quaternion.LookRotation(transform.GetChild(1).GetChild(0).forward);
+        NetworkServer.Spawn(temp);
+        Destroy(temp, 5.0f);
     }
 }
