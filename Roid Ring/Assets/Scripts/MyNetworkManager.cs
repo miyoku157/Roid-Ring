@@ -1,14 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Networking;
-
-public class MyNetworkManager : NetworkManager
-{
+public class MyNetworkManager : NetworkManager {
     public int playerMax = 2;
     private MyNetworkDiscovery discovery;
-
-    private void Start()
-    {
+    // Use this for initialization
+    void Start () {
         discovery = GetComponent<MyNetworkDiscovery>();
     }
 
@@ -18,7 +16,6 @@ public class MyNetworkManager : NetworkManager
         discovery.StartAsServer();
 
     }
-
     public override void OnStartClient(NetworkClient client)
     {
         discovery.showGUI = false;
@@ -38,5 +35,4 @@ public class MyNetworkManager : NetworkManager
             discovery.StopBroadcast();
         }
     }
-   
 }
