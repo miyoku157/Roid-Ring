@@ -23,6 +23,8 @@ public class SpaceshipController : NetworkBehaviour
 
     void FixedUpdate()
     {
+        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+
         if(isLocalPlayer)
         {
             int vertThrust, horizThrust;
