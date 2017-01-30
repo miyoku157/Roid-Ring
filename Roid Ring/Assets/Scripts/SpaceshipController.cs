@@ -24,6 +24,8 @@ public class SpaceshipController : NetworkBehaviour
 
     void FixedUpdate()
     {
+        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+
         if(isLocalPlayer)
         {
             int vertThrust, horizThrust;
@@ -43,8 +45,8 @@ public class SpaceshipController : NetworkBehaviour
 
                 rb.AddForce(transform.forward * Input.GetAxis("Vertical") * vertThrust * thrustMultiplier);
                 rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipForwardSpeed / 3.6f);
-
             }
+
             if(Input.GetAxis("Horizontal") != 0)
             {
                 if (Input.GetAxis("Horizontal") > 0)
@@ -75,9 +77,9 @@ public class SpaceshipController : NetworkBehaviour
     }
 
     [Command]
-    public void CmdSpawn(GameObject temp)
+    public void CmdSpawn()
     {
-            temp = Instantiate(projectile);
+            GameObject temp = Instantiate(projectile);
             temp.transform.position = transform.GetChild(1).GetChild(0).position;
             /*Rigidbody rb2 = temp.GetComponent<Rigidbody>();
             rb2.velocity += transform.GetChild(1).GetChild(0).forward * 300;
