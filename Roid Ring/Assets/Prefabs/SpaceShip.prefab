@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 114256967004840328}
   - component: {fileID: 114888662703160296}
   - component: {fileID: 114117212657265870}
+  - component: {fileID: 114468949464537976}
   m_Layer: 0
   m_Name: SpaceShip
   m_TagString: Player
@@ -361,6 +362,21 @@ MonoBehaviour:
     i15: 226
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114468949464537976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1240821811874414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4717296ae81ad409cd1f643278a749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHull: 200
+  maxShield: 100
+  shieldRechargeRate: 2
+  isPlayer: 1
 --- !u!114 &114888662703160296
 MonoBehaviour:
   m_ObjectHideFlags: 1
