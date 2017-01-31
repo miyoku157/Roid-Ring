@@ -22,8 +22,7 @@ public class SpaceshipController : NetworkBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
         cam = transform.GetChild(2).GetComponent<Camera>();
-
-        if(isLocalPlayer)
+        if (isLocalPlayer)
         {
             cam.enabled = true;
         }
@@ -41,12 +40,14 @@ public class SpaceshipController : NetworkBehaviour
 
     void FixedUpdate()
     {
-        if(isLocalPlayer)
+        if (!isLocalPlayer) return;
+
+        if (isClient)
         {
             int vertThrust, horizThrust;
             vertThrust = horizThrust = 0;
 
-            if(Input.GetAxis("Vertical") != 0)
+            if (Input.GetAxis("Vertical") != 0)
             {
                 if (Input.GetAxis("Vertical") > 0)
                 {
@@ -58,8 +59,7 @@ public class SpaceshipController : NetworkBehaviour
                     vertThrust = shipBackwardThrust;
                 }
 
-                rb.AddForce(transform.forward * Input.GetAxis("Vertical") * vertThrust * thrustMultiplier);
-                rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipForwardSpeed / 3.6f);
+                CmdMovevertic(vertThrust);
             }
 
             if(Input.GetAxis("Horizontal") != 0)
@@ -73,9 +73,7 @@ public class SpaceshipController : NetworkBehaviour
                 {
                     horizThrust = shipBackwardThrust;
                 }
-
-                rb.AddForce(transform.right * Input.GetAxis("Horizontal") * horizThrust * thrustMultiplier);
-                rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipSideSpeed / 3.6f);
+                CmdMovehoriz(horizThrust);
             }
 
             rb.velocity *= killSpeed;
@@ -90,7 +88,16 @@ public class SpaceshipController : NetworkBehaviour
             }
         }
     }
-
+    public void CmdMovevertic(int vertThrust)
+    {
+        rb.AddForce(transform.forward * Input.GetAxis("Vertical") * vertThrust * thrustMultiplier);
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipForwardSpeed / 3.6f);
+    }
+    public void CmdMovehoriz(int horizThrust)
+    {
+        rb.AddForce(transform.right * Input.GetAxis("Horizontal") * horizThrust * thrustMultiplier);
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipSideSpeed / 3.6f);
+    }
     [Command]
     public void CmdSpawn()
     {

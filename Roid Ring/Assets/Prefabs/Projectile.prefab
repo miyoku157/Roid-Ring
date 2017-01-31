@@ -98,7 +98,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &65093985690419694
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -122,7 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2f6bc7d1543ba40bcd064aa44cf718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canon: {fileID: 4949154443662546, guid: bd4dacbd8bcb50a488369d5ca69160e2, type: 2}
 --- !u!114 &114567846540086278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,14 +134,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0
+  m_SendInterval: 0.1
   m_SyncRotationAxis: 2
-  m_RotationSyncCompression: 0
+  m_RotationSyncCompression: 2
   m_SyncSpin: 0
   m_MovementTheshold: 0.001
   m_SnapThreshold: 5
-  m_InterpolateRotation: 0
-  m_InterpolateMovement: 0
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114954114127090750
 MonoBehaviour:
   m_ObjectHideFlags: 1
