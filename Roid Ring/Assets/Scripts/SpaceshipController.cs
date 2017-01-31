@@ -14,6 +14,7 @@ public class SpaceshipController : NetworkBehaviour
     public float killSpeed = 0.1f;
 
     public GameObject shieldEffect;
+    public Transform shieldCoreTransform;
     public GameObject projectile;
 
     private int thrustMultiplier = 20;
@@ -27,10 +28,9 @@ public class SpaceshipController : NetworkBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         cam = transform.GetChild(2).GetComponent<Camera>();
         
-        shieldOffset = new Vector3(0, 1.57f, -0.9f);
         GameObject shield = Instantiate(shieldEffect);
         shieldScript = shield.GetComponent<ShieldBehavior>();
-        shieldScript.Init(transform, shieldOffset);
+        shieldScript.setPos(transform.rotation, shieldCoreTransform.position);
 
         if (isLocalPlayer)
         {
@@ -45,7 +45,7 @@ public class SpaceshipController : NetworkBehaviour
     void Update()
     {
         transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
-        shieldScript.setPos(transform);
+        shieldScript.setPos(transform.rotation, shieldCoreTransform.position);
         cam.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
 
