@@ -16,6 +16,7 @@ public class SpaceshipController : NetworkBehaviour
     public GameObject shieldEffect;
     public Transform shieldCoreTransform;
     public GameObject projectile;
+    public List<GameObject> sternThrusters, portThrusters, starboardThrusters, bowThrusters;
 
     private int thrustMultiplier = 20;
     private Vector3 shieldOffset;
@@ -34,10 +35,12 @@ public class SpaceshipController : NetworkBehaviour
 
         if (isLocalPlayer)
         {
+            shield.transform.GetChild(0).gameObject.layer = 13;
             cam.enabled = true;
         }
         else
         {
+            shield.transform.GetChild(0).gameObject.layer = 17;
             cam.enabled = false;
         }
     }
@@ -131,6 +134,7 @@ public class SpaceshipController : NetworkBehaviour
     public void CmdSpawn()
     {
         GameObject temp = Instantiate(projectile);
+        temp.layer = 13;
         temp.transform.position = transform.GetChild(1).GetChild(0).position;
         temp.transform.rotation = Quaternion.LookRotation(transform.GetChild(1).GetChild(0).forward);
         NetworkServer.Spawn(temp);

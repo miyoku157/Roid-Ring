@@ -36,25 +36,25 @@ Material:
     m_Floats:
     - first:
         name: _FieldBG
-      second: 0.5
+      second: 3
     - first:
         name: _FieldBGPow
       second: 8.408929
     - first:
         name: _FieldPanSpeed
-      second: 1
+      second: 1.5
     - first:
         name: _FieldSparks
-      second: 1
+      second: 4
     - first:
         name: _FieldSparksPow
       second: 2
     - first:
         name: _InnerPow
-      second: 4
+      second: 14
     - first:
         name: _InnterOffset
-      second: 3
+      second: 1.5
     - first:
         name: _InnterSize
       second: 5
@@ -63,13 +63,13 @@ Material:
       second: 1.3448215
     - first:
         name: _Offset
-      second: 0.0001
+      second: 0.01
     - first:
         name: _OutterOffset
-      second: 3
+      second: 2
     - first:
         name: _OutterPow
-      second: 3
+      second: 15
     - first:
         name: _OutterSize
       second: 4
