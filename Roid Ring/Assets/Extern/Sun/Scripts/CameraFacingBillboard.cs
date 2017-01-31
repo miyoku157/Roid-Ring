@@ -5,6 +5,9 @@ public class CameraFacingBillboard : MonoBehaviour
 {
     void LateUpdate()
     {
-	transform.LookAt(Camera.main.transform,transform.up);
+        if(Camera.main != null)
+        {
+            transform.LookAt(Camera.main.transform, transform.up);
+        }
     }
 }

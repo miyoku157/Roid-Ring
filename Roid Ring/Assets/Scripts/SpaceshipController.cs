@@ -33,11 +33,14 @@ public class SpaceshipController : NetworkBehaviour
         }
     }
 
+    void Update()
+    {
+        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+        cam.transform.rotation = Quaternion.Euler(90, 0, 0);
+    }
+
     void FixedUpdate()
     {
-        cam.transform.rotation = Quaternion.Euler(90, 0, 0);
-        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
-
         if(isLocalPlayer)
         {
             int vertThrust, horizThrust;
