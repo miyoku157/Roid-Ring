@@ -43,7 +43,7 @@ public class Damageable : NetworkBehaviour
     [Command]
     private void CmdKnockBack(GameObject coll)
     {
-        Vector3 forceVec = -coll.gameObject.GetComponent<Rigidbody>().velocity * 10;
+        Vector3 forceVec = -coll.gameObject.GetComponent<Rigidbody>().velocity * 3;
         coll.gameObject.GetComponent<Rigidbody>().AddForce(forceVec, ForceMode.VelocityChange);
     }
     void OnCollisionEnter(Collision coll)
