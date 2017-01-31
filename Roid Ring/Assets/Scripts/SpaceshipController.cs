@@ -88,15 +88,32 @@ public class SpaceshipController : NetworkBehaviour
             }
         }
     }
-    public void CmdMovevertic(int vertThrust)
+
+   [ClientRpc]
+    public void RpcMovevertic(int vertThrust)
     {
         rb.AddForce(transform.forward * Input.GetAxis("Vertical") * vertThrust * thrustMultiplier);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipForwardSpeed / 3.6f);
     }
+    [ClientRpc]
+    public void RpcMovehoriz(int horizThrust)
+    {
+        rb.AddForce(transform.right * Input.GetAxis("Horizontal") * horizThrust * thrustMultiplier);
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipSideSpeed / 3.6f);
+    }
+    [Command]
+    public void CmdMovevertic(int vertThrust)
+    {
+        rb.AddForce(transform.forward * Input.GetAxis("Vertical") * vertThrust * thrustMultiplier);
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipForwardSpeed / 3.6f);
+        RpcMovevertic(vertThrust);
+    }
+    [Command]
     public void CmdMovehoriz(int horizThrust)
     {
         rb.AddForce(transform.right * Input.GetAxis("Horizontal") * horizThrust * thrustMultiplier);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipSideSpeed / 3.6f);
+        RpcMovehoriz(horizThrust);
     }
     [Command]
     public void CmdSpawn()
