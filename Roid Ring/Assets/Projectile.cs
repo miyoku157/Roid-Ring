@@ -7,8 +7,16 @@ public class Projectile : NetworkBehaviour {
 
     // Use this for initialization
 	void Start () {
+
+        if (isClient)
+        {
+            CmdFire();
+        }
+    }
+    [Command]
+    void CmdFire()
+    {
         GetComponent<Rigidbody>().AddForce(transform.forward * 300);
     }
-
     // Update is called once per frame
 }
