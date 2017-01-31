@@ -22,6 +22,7 @@ public class WeaponController : MonoBehaviour
         sc = transform.root.GetComponent<SpaceshipController>();
         if (sc.isLocalPlayer)
         {
+            energy = 50;
             testCube = GameObject.Find("Cube");
             StartCoroutine("EnergyRecovery");
             enabled = true;

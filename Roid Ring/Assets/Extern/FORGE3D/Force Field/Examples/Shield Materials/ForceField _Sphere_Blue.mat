@@ -63,7 +63,7 @@ Material:
       second: 1.3448215
     - first:
         name: _Offset
-      second: 0.025
+      second: 0.0001
     - first:
         name: _OutterOffset
       second: 3

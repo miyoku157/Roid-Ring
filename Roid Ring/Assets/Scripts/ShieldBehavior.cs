@@ -1,0 +1,1 @@
+﻿using System.Collections; using System.Collections.Generic; using UnityEngine;  public class ShieldBehavior : MonoBehaviour {     public GameObject obj;      private Transform tr;  	void Start ()     {         tr = obj.gameObject.transform; 	} 	 	void Update ()     {         transform.position = tr.position;         transform.rotation = tr.rotation; 	} }
