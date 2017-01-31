@@ -13,11 +13,17 @@ public class Aim : MonoBehaviour
 	}
 	void Update ()
     {
-        position = new Rect(Input.mousePosition.x - (crosshair.width / 2), -(Input.mousePosition.y - crosshair.height), crosshair.width, crosshair.height);
+        Vector2 pos = ScreenToGUIPoint(new Vector2(Input.mousePosition.x - (crosshair.width / 2), (Input.mousePosition.y + crosshair.height/2)));
+        position = new Rect(pos.x,pos.y, crosshair.width, crosshair.height);
 	}
 
     private void OnGUI()
     {
         GUI.DrawTexture(position, crosshair);
+    }
+
+    private Vector2 ScreenToGUIPoint(Vector2 input)
+    {
+        return new Vector2(input.x,Screen.height-input.y);
     }
 }

@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04307381, g: 0.046196014, b: 0.09416928, a: 1}
+  m_IndirectSpecularColor: {r: 0.042928338, g: 0.04626368, b: 0.09408917, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0cf6ada5938444b91174f1de1c37b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshair: {fileID: 2800000, guid: be419d23fb5973c4588277b9bfcbcfcd, type: 3}
+  crosshair: {fileID: 2800000, guid: 2e2884381d81fd74392dc2125172b8d6, type: 3}
 --- !u!4 &1066264907
 Transform:
   m_ObjectHideFlags: 0
@@ -512,7 +512,7 @@ Camera:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1102257598}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}

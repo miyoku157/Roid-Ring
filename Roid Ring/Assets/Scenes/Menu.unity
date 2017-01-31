@@ -739,6 +739,7 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   playerMax: 2
+  discovery: {fileID: 0}
 --- !u!1 &1046650140
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,5 @@ public class MenuManager : MonoBehaviour {
     public void LoadGame()
     {
         NetworkManager.singleton.StartHost();
-        NetworkManager.singleton.ServerChangeScene("Main");
     }
 }
