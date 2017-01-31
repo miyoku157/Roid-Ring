@@ -23,8 +23,6 @@ public class Damageable : NetworkBehaviour
     [Command]
     public void CmdTakeDamage(int amount)
     {
-
-        
         temp = 0;
         shield -= amount;
             
@@ -43,8 +41,15 @@ public class Damageable : NetworkBehaviour
     [Command]
     private void CmdKnockBack(GameObject coll)
     {
-        Vector3 forceVec = -coll.gameObject.GetComponent<Rigidbody>().velocity * 3;
-        coll.gameObject.GetComponent<Rigidbody>().AddForce(forceVec, ForceMode.VelocityChange);
+        Vector3 forceVec = -coll.gameObject.GetComponent<Rigidbody>().velocity * 100;
+        coll.gameObject.GetComponent<Rigidbody>().AddForce(forceVec, ForceMode.Impulse);
+        RpcKnockBack(coll);
+    }
+    [ClientRpc]
+    private void RpcKnockBack(GameObject coll)
+    {
+        Vector3 forceVec = -coll.gameObject.GetComponent<Rigidbody>().velocity * 100;
+        coll.gameObject.GetComponent<Rigidbody>().AddForce(forceVec, ForceMode.Impulse);
     }
     void OnCollisionEnter(Collision coll)
     {
