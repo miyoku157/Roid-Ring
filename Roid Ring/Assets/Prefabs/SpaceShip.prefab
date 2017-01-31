@@ -453,6 +453,8 @@ MonoBehaviour:
   shipSideSpeed: 200
   shipSideThrust: 80
   killSpeed: 0.98
+  shieldEffect: {fileID: 1577338277124322, guid: 4964021790af8d24a88c2212c5437287,
+    type: 2}
   projectile: {fileID: 1306247165513812, guid: d6cb624231fbd7f41ba289fe2e0a66c2, type: 2}
 --- !u!114 &114986354751173602
 MonoBehaviour:

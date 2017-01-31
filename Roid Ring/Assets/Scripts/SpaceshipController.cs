@@ -13,15 +13,25 @@ public class SpaceshipController : NetworkBehaviour
     public int shipSideThrust = 80;
     public float killSpeed = 0.1f;
 
+    public GameObject shieldEffect;
     public GameObject projectile;
+
     private int thrustMultiplier = 20;
+    private Vector3 shieldOffset;
     private Rigidbody rb;
     private Camera cam;
+    private ShieldBehavior shieldScript;
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         cam = transform.GetChild(2).GetComponent<Camera>();
+        
+        shieldOffset = new Vector3(0, 1.57f, -0.9f);
+        GameObject shield = Instantiate(shieldEffect);
+        shieldScript = shield.GetComponent<ShieldBehavior>();
+        shieldScript.Init(transform, shieldOffset);
+
         if (isLocalPlayer)
         {
             cam.enabled = true;
@@ -35,14 +45,15 @@ public class SpaceshipController : NetworkBehaviour
     void Update()
     {
         transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+        shieldScript.setPos(transform);
         cam.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
 
     void FixedUpdate()
     {
-        if (!isLocalPlayer) return;
+        if(!isLocalPlayer) return;
 
-        if (isClient)
+        if(isClient)
         {
             int vertThrust, horizThrust;
             vertThrust = horizThrust = 0;
@@ -115,6 +126,7 @@ public class SpaceshipController : NetworkBehaviour
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipSideSpeed / 3.6f);
         RpcMovehoriz(horizThrust);
     }
+
     [Command]
     public void CmdSpawn()
     {
