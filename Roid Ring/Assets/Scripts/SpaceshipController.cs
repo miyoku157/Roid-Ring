@@ -23,12 +23,10 @@ public class SpaceshipController : NetworkBehaviour
     private Rigidbody rb;
     private Camera cam;
     private ShieldBehavior shieldScript;
-
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         cam = transform.GetChild(2).GetComponent<Camera>();
-        
         GameObject shield = Instantiate(shieldEffect);
         shieldScript = shield.GetComponent<ShieldBehavior>();
         shieldScript.setPos(transform.rotation, shieldCoreTransform.position);

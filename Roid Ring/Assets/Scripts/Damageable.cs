@@ -38,6 +38,7 @@ public class Damageable : NetworkBehaviour
             Network.Destroy(this.gameObject);
         }
     }
+
     [Command]
     private void CmdKnockBack(GameObject coll)
     {
@@ -45,12 +46,14 @@ public class Damageable : NetworkBehaviour
         coll.gameObject.GetComponent<Rigidbody>().AddForce(forceVec, ForceMode.Impulse);
         RpcKnockBack(coll);
     }
+
     [ClientRpc]
     private void RpcKnockBack(GameObject coll)
     {
         Vector3 forceVec = -coll.gameObject.GetComponent<Rigidbody>().velocity * 100;
         coll.gameObject.GetComponent<Rigidbody>().AddForce(forceVec, ForceMode.Impulse);
     }
+
     void OnCollisionEnter(Collision coll)
     {
         if(coll.gameObject.tag == "Shot")

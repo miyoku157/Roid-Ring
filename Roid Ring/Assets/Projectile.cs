@@ -17,6 +17,12 @@ public class Projectile : NetworkBehaviour {
     void CmdFire()
     {
         GetComponent<Rigidbody>().AddForce(transform.forward * 300);
+        RpcFire();
+    }
+    [ClientRpc]
+    void RpcFire()
+    {
+        GetComponent<Rigidbody>().AddForce(transform.forward * 300);
     }
     // Update is called once per frame
 }

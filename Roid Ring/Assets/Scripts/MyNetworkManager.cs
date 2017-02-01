@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
+
 public class MyNetworkManager : NetworkManager {
     public int playerMax = 2;
     public MyNetworkDiscovery discovery;
@@ -20,13 +22,35 @@ public class MyNetworkManager : NetworkManager {
     {
         discovery.StopBroadcast();
     }
-
-    public override void OnClientConnect(NetworkConnection conn)
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        base.OnClientConnect(conn);
-        if (base.numPlayers > playerMax)
+        base.OnServerAddPlayer(conn, playerControllerId);
+        if (base.numPlayers > playerMax - 1)
         {
+            Time.timeScale = 1;
+            GameObject.Find("Canvas").GetComponentInChildren<Image>().enabled = false;
             discovery.StopBroadcast();
         }
+        else
+        {
+            GameObject.Find("Canvas").GetComponent<Canvas>().worldCamera = Camera.main;
+            GameObject.Find("Canvas").GetComponentInChildren<Image>().enabled = true;
+            Time.timeScale = 0;
+            
+
+        }
+
     }
+    /*[Command]
+    private void Cmdfreeze()
+    {
+        Time.timeScale = 0.1f;
+
+    }
+    [Command]
+    private void CmdLaunch()
+    {
+        Time.timeScale = 0.1f;
+
+    }*/
 }
