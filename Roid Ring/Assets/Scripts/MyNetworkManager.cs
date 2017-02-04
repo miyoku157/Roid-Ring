@@ -25,7 +25,7 @@ public class MyNetworkManager : NetworkManager {
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         base.OnServerAddPlayer(conn, playerControllerId);
-        if (base.numPlayers > playerMax - 1)
+        if (base.numPlayers > playerMax - 2)
         {
             Time.timeScale = 1;
             GameObject.Find("Canvas").GetComponentInChildren<Image>().enabled = false;
