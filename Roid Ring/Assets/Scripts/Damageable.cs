@@ -37,7 +37,7 @@ public class Damageable : NetworkBehaviour
 
         if(hull < 0)
         {
-            Network.Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 
