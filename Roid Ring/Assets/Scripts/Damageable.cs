@@ -15,11 +15,13 @@ public class Damageable : NetworkBehaviour
     {
         shield = maxShield;
         hull = maxHull;
+
         if(maxShield > 0)
         {
             StartCoroutine("ShieldRecharge");
         }
     }
+
     [Command]
     public void CmdTakeDamage(int amount)
     {
