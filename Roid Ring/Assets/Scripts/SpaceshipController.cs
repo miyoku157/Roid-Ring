@@ -49,7 +49,7 @@ public class SpaceshipController : NetworkBehaviour
 
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, -1.55f, transform.position.z);
         shieldScript.setPos(transform.rotation, shieldCoreTransform.position);
         cam.transform.rotation = Quaternion.Euler(90, 0, 0);
 

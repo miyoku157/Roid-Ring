@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class MyNetworkManager : NetworkManager {
-    public int playerMax = 2;
+    private int playerMax = 2;
     public MyNetworkDiscovery discovery;
     // Use this for initialization
     void Start () {
@@ -25,7 +25,7 @@ public class MyNetworkManager : NetworkManager {
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         base.OnServerAddPlayer(conn, playerControllerId);
-        if (base.numPlayers > playerMax - 2)
+        if (base.numPlayers > playerMax - 1)
         {
             Time.timeScale = 1;
             GameObject.Find("Canvas").GetComponentInChildren<Image>().enabled = false;
