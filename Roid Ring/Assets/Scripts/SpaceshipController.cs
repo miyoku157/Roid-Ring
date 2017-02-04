@@ -18,11 +18,15 @@ public class SpaceshipController : NetworkBehaviour
     public GameObject projectile;
     public List<GameObject> sternThrusters, portThrusters, starboardThrusters, bowThrusters;
 
+    private float thrusterStartingSpeed = 0.03f;
+    private float thrusterKillingSpeed = 0.1f;
     private int thrustMultiplier = 20;
     private Vector3 shieldOffset;
     private Rigidbody rb;
     private Camera cam;
     private ShieldBehavior shieldScript;
+    private float sternThrustVisual, portThrustVisual, starboardThrustVisual, bowThrustVisual;
+
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -48,6 +52,14 @@ public class SpaceshipController : NetworkBehaviour
         transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
         shieldScript.setPos(transform.rotation, shieldCoreTransform.position);
         cam.transform.rotation = Quaternion.Euler(90, 0, 0);
+
+        //Debug.Log(bowThrustVisual);
+
+        foreach (GameObject go in bowThrusters)
+        {
+            ParticleSystem.MainModule ps = go.GetComponent<ParticleSystem>().main;
+            ps.startSpeed = -15 * bowThrustVisual;
+        }
     }
 
     void FixedUpdate()
@@ -64,30 +76,50 @@ public class SpaceshipController : NetworkBehaviour
                 if (Input.GetAxis("Vertical") > 0)
                 {
                     vertThrust = shipForwardThrust;
+                    bowThrustVisual += thrusterStartingSpeed;
+                    sternThrustVisual -= thrusterKillingSpeed;
                 }
 
                 if (Input.GetAxis("Vertical") < 0)
                 {
                     vertThrust = shipBackwardThrust;
+                    sternThrustVisual += thrusterStartingSpeed;
+                    bowThrustVisual -= thrusterKillingSpeed;
                 }
 
                 CmdMovevertic(vertThrust);
             }
+            else
+            {
+                bowThrustVisual -= thrusterKillingSpeed;
+                sternThrustVisual -= thrusterKillingSpeed;
+            }
 
-            if(Input.GetAxis("Horizontal") != 0)
+            if (Input.GetAxis("Horizontal") != 0)
             {
                 if (Input.GetAxis("Horizontal") > 0)
                 {
                     horizThrust = shipForwardThrust;
+                    portThrustVisual += thrusterStartingSpeed;
+                    starboardThrustVisual -= thrusterKillingSpeed;
                 }
 
                 if (Input.GetAxis("Horizontal") < 0)
                 {
                     horizThrust = shipBackwardThrust;
+                    starboardThrustVisual += thrusterStartingSpeed;
+                    portThrustVisual -= thrusterKillingSpeed;
                 }
+
                 CmdMovehoriz(horizThrust);
             }
+            else
+            {
+                portThrustVisual -= thrusterKillingSpeed;
+                starboardThrustVisual -= thrusterKillingSpeed;
+            }
 
+            checkThrustVisuals();
             rb.velocity *= killSpeed;
 
             if(Input.GetKey(KeyCode.Q))
@@ -99,6 +131,13 @@ public class SpaceshipController : NetworkBehaviour
                 transform.Rotate(new Vector3(0, 1, 0));
             }
         }
+    }
+
+    void checkThrustVisuals()
+    {
+        bowThrustVisual = bowThrustVisual > 1 ? 1 : bowThrustVisual;
+        bowThrustVisual = bowThrustVisual < 0 ? 0 : bowThrustVisual;
+
     }
 
    [ClientRpc]
@@ -113,6 +152,7 @@ public class SpaceshipController : NetworkBehaviour
         rb.AddForce(transform.right * Input.GetAxis("Horizontal") * horizThrust * thrustMultiplier);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, shipSideSpeed / 3.6f);
     }
+
     [Command]
     public void CmdMovevertic(int vertThrust)
     {
