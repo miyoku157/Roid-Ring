@@ -47,12 +47,12 @@ public class WeaponController : MonoBehaviour
         angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
         parentAngle = transform.root.eulerAngles.y;
 
-        transform.localRotation = Quaternion.Euler(-90, -180, -angle + 90 - parentAngle);
+        transform.localRotation = Quaternion.Euler(0, -angle + 90 - parentAngle, 0);
 
         if(Input.GetKey(KeyCode.Mouse0) && energy > 5 && timeToCooldown <= 0)
         {
             sc.CmdSpawn();
-            energy -= 5;
+            energy -= 2;
             timeToCooldown = firingCooldpwn;
         }
         else
