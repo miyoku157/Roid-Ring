@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4717296ae81ad409cd1f643278a749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHull: 0
-  maxShield: 0
+  maxHull: 100
+  maxShield: 10
   shieldRechargeRate: 1
   isPlayer: 0
 --- !u!114 &114132048381597062
