@@ -46,7 +46,7 @@ public class SpaceshipController : NetworkBehaviour
         }
         else
         {
-            shield.transform.GetChild(0).gameObject.layer = 17;
+            shield.transform.GetChild(0).gameObject.layer = 14;
             cam.enabled = false;
         }
 
@@ -306,7 +306,16 @@ public class SpaceshipController : NetworkBehaviour
     public void CmdSpawn()
     {
         GameObject temp = Instantiate(projectile);
-        temp.layer = 13;
+
+        if(isLocalPlayer)
+        {
+            temp.layer = 13;
+        }
+        else
+        {
+            temp.layer = 14;
+        }
+        
         temp.transform.position = transform.GetChild(1).GetChild(0).position;
         temp.transform.rotation = Quaternion.LookRotation(transform.GetChild(1).GetChild(0).forward);
         NetworkServer.Spawn(temp);
