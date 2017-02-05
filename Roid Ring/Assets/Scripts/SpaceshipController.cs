@@ -321,8 +321,8 @@ public class SpaceshipController : NetworkBehaviour
         
         temp.transform.position = transform.GetChild(1).GetChild(0).position;
         temp.transform.rotation = Quaternion.LookRotation(transform.GetChild(1).GetChild(0).forward);
-        RpcSpawn(temp);
         NetworkServer.Spawn(temp);
+        RpcSpawn(temp);
         Destroy(temp, 5.0f);
     }
 
