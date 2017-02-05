@@ -308,8 +308,6 @@ public class SpaceshipController : NetworkBehaviour
     [Command]
     public void CmdSpawn()
     {
-        if (isServer)
-        {
             GameObject temp = Instantiate(projectile);
 
             if (isLocalPlayer)
@@ -325,6 +323,5 @@ public class SpaceshipController : NetworkBehaviour
             temp.transform.rotation = Quaternion.LookRotation(transform.GetChild(1).GetChild(0).forward);
             NetworkServer.Spawn(temp);
             Destroy(temp, 5.0f);
-        }
     }
 }
