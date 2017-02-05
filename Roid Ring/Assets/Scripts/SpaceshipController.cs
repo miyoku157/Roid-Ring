@@ -39,13 +39,15 @@ public class SpaceshipController : NetworkBehaviour
         shieldScript = shield.GetComponent<ShieldBehavior>();
         shieldScript.setPos(transform.rotation, shieldCoreTransform.position);
 
-        if (isLocalPlayer)
+        if(isLocalPlayer)
         {
+            gameObject.layer = 13;
             shield.transform.GetChild(0).gameObject.layer = 13;
             cam.enabled = true;
         }
         else
         {
+            gameObject.layer = 14;
             shield.transform.GetChild(0).gameObject.layer = 14;
             cam.enabled = false;
         }
@@ -58,17 +60,18 @@ public class SpaceshipController : NetworkBehaviour
         transform.position = new Vector3(transform.position.x, -1.55f, transform.position.z);
         shieldScript.setPos(transform.rotation, shieldCoreTransform.position);
         cam.transform.rotation = Quaternion.Euler(90, 0, 0);
-        CmdEmitter();
+        //CmdEmitter();
     }
+
     void Emitter()
     {
-        foreach (GameObject go in bowThrusters)
+        foreach(GameObject go in bowThrusters)
         {
             ps = go.GetComponent<ParticleSystem>();
             psMain = ps.main;
             psEmission = ps.emission;
 
-            if (bowThrustVisual < 0.1)
+            if(bowThrustVisual < 0.1)
             {
                 psEmission.enabled = false;
             }
@@ -79,7 +82,7 @@ public class SpaceshipController : NetworkBehaviour
             }
         }
 
-        foreach (GameObject go in sternThrusters)
+        foreach(GameObject go in sternThrusters)
         {
             ps = go.GetComponent<ParticleSystem>();
             psMain = ps.main;
@@ -96,13 +99,13 @@ public class SpaceshipController : NetworkBehaviour
             }
         }
 
-        foreach (GameObject go in portThrusters)
+        foreach(GameObject go in portThrusters)
         {
             ps = go.GetComponent<ParticleSystem>();
             psMain = ps.main;
             psEmission = ps.emission;
 
-            if (portThrustVisual < 0.1)
+            if(portThrustVisual < 0.1)
             {
                 psEmission.enabled = false;
             }
@@ -113,13 +116,13 @@ public class SpaceshipController : NetworkBehaviour
             }
         }
 
-        foreach (GameObject go in starboardThrusters)
+        foreach(GameObject go in starboardThrusters)
         {
             ps = go.GetComponent<ParticleSystem>();
             psMain = ps.main;
             psEmission = ps.emission;
 
-            if (starboardThrustVisual < 0.1)
+            if(starboardThrustVisual < 0.1)
             {
                 psEmission.enabled = false;
             }
