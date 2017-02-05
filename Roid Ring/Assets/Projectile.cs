@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Projectile : NetworkBehaviour {
-
-    // Use this for initialization
-	void Start () {
+public class Projectile : NetworkBehaviour
+{
+	void Start ()
+    {
 
         if (isClient)
         {
             CmdFire();
         }
     }
+
+    void OnCollisionEnter(Collision coll)
+    {
+        Destroy(this.gameObject);
+    }
+
     [Command]
     void CmdFire()
     {
@@ -24,5 +30,4 @@ public class Projectile : NetworkBehaviour {
     {
         GetComponent<Rigidbody>().AddForce(transform.forward * 300);
     }
-    // Update is called once per frame
 }
