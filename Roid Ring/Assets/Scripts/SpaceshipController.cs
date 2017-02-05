@@ -60,7 +60,7 @@ public class SpaceshipController : NetworkBehaviour
         transform.position = new Vector3(transform.position.x, -1.55f, transform.position.z);
         shieldScript.setPos(transform.rotation, shieldCoreTransform.position);
         cam.transform.rotation = Quaternion.Euler(90, 0, 0);
-        //CmdEmitter();
+        CmdEmitter();
     }
 
     void Emitter()
@@ -88,7 +88,7 @@ public class SpaceshipController : NetworkBehaviour
             psMain = ps.main;
             psEmission = ps.emission;
 
-            if (sternThrustVisual < 0.1)
+            if(sternThrustVisual < 0.1)
             {
                 psEmission.enabled = false;
             }
@@ -133,13 +133,13 @@ public class SpaceshipController : NetworkBehaviour
             }
         }
 
-        /*foreach (GameObject go in starboardRotationThrusters)
+        /*foreach(GameObject go in starboardRotationThrusters)
         {
             ps = go.GetComponent<ParticleSystem>();
             psMain = ps.main;
             psEmission = ps.emission;
 
-            if (starboardRotationVisual < 0.1)
+            if(starboardRotationVisual < 0.1)
             {
                 psEmission.enabled = false;
             }
@@ -150,13 +150,13 @@ public class SpaceshipController : NetworkBehaviour
             }
         }
 
-        foreach (GameObject go in portRotationThrusters)
+        foreach(GameObject go in portRotationThrusters)
         {
             ps = go.GetComponent<ParticleSystem>();
             psMain = ps.main;
             psEmission = ps.emission;
 
-            if (portRotationVisual < 0.1)
+            if(portRotationVisual < 0.1)
             {
                 psEmission.enabled = false;
             }
