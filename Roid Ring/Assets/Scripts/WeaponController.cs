@@ -6,7 +6,6 @@ using UnityEngine.Networking;
 public class WeaponController : MonoBehaviour
 {
     public GameObject projectile;
-    public GameObject testCube;
     SpaceshipController sc;
     public int projectileSpeed = 600;
     public int energyRecoverySpeed = 1;
@@ -23,7 +22,6 @@ public class WeaponController : MonoBehaviour
         if (sc.isLocalPlayer)
         {
             energy = 50;
-            testCube = GameObject.Find("Cube");
             StartCoroutine("EnergyRecovery");
             enabled = true;
         }
@@ -38,10 +36,6 @@ public class WeaponController : MonoBehaviour
         mouse_pos = Input.mousePosition;
         mouse_pos.z = 25;
         object_pos = Camera.main.WorldToScreenPoint(transform.position);
-
-        // Test cube movement
-        if(testCube != null)
-            testCube.transform.position = Camera.main.ScreenToWorldPoint(mouse_pos);
 
         offset = new Vector2(mouse_pos.x - object_pos.x, mouse_pos.y - object_pos.y);
         angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
