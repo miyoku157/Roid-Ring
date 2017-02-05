@@ -16,7 +16,7 @@ public class SpaceshipController : NetworkBehaviour
     public GameObject shieldEffect;
     public Transform shieldCoreTransform;
     public GameObject projectile;
-    public List<GameObject> sternThrusters, portThrusters, starboardThrusters, bowThrusters;
+    public List<GameObject> sternThrusters, portThrusters, starboardThrusters, bowThrusters, portRotationThrusters, starboardRotationThrusters;
 
     private float thrusterStartingSpeed = 0.03f;
     private float thrusterKillingSpeed = 0.1f;
@@ -25,7 +25,8 @@ public class SpaceshipController : NetworkBehaviour
     private Rigidbody rb;
     private Camera cam;
     private ShieldBehavior shieldScript;
-    private float sternThrustVisual, portThrustVisual, starboardThrustVisual, bowThrustVisual;
+    private float sternThrustVisual, portThrustVisual, starboardThrustVisual, bowThrustVisual, portRotationVisual, starboardRotationVisual;
+    private bool isRotating;
     private ParticleSystem ps;
     private ParticleSystem.MainModule psMain;
     private ParticleSystem.EmissionModule psEmission;
@@ -128,6 +129,40 @@ public class SpaceshipController : NetworkBehaviour
                 psMain.startSpeed = -15 * starboardThrustVisual;
             }
         }
+
+        /*foreach (GameObject go in starboardRotationThrusters)
+        {
+            ps = go.GetComponent<ParticleSystem>();
+            psMain = ps.main;
+            psEmission = ps.emission;
+
+            if (starboardRotationVisual < 0.1)
+            {
+                psEmission.enabled = false;
+            }
+            else
+            {
+                psEmission.enabled = true;
+                psMain.startSpeed = -15 * starboardRotationVisual;
+            }
+        }
+
+        foreach (GameObject go in portRotationThrusters)
+        {
+            ps = go.GetComponent<ParticleSystem>();
+            psMain = ps.main;
+            psEmission = ps.emission;
+
+            if (portRotationVisual < 0.1)
+            {
+                psEmission.enabled = false;
+            }
+            else
+            {
+                psEmission.enabled = true;
+                psMain.startSpeed = -15 * portRotationVisual;
+            }
+        }*/
     }
     [Command]
     void CmdEmitter()
@@ -142,10 +177,11 @@ public class SpaceshipController : NetworkBehaviour
     }
     void FixedUpdate()
     {
-        if(!isLocalPlayer) return;
+        if (!isLocalPlayer) return;
 
-        if(isClient)
+        if (isClient)
         {
+            isRotating = false;
             int vertThrust, horizThrust;
             vertThrust = horizThrust = 0;
 
@@ -203,10 +239,21 @@ public class SpaceshipController : NetworkBehaviour
             if(Input.GetKey(KeyCode.Q))
             {
                 transform.Rotate(new Vector3(0, -1, 0));
+                portRotationVisual += thrusterStartingSpeed;
+                starboardRotationVisual -= thrusterKillingSpeed;
+                //isRotating = true;
             }
             else if(Input.GetKey(KeyCode.D))
             {
                 transform.Rotate(new Vector3(0, 1, 0));
+                starboardRotationVisual += thrusterStartingSpeed;
+                portRotationVisual -= thrusterKillingSpeed;
+                //isRotating = true;
+            }
+            else
+            {
+                portRotationVisual -= thrusterKillingSpeed;
+                starboardRotationVisual -= thrusterKillingSpeed;
             }
         }
     }
@@ -221,7 +268,10 @@ public class SpaceshipController : NetworkBehaviour
         portThrustVisual = portThrustVisual < 0 ? 0 : portThrustVisual;
         starboardThrustVisual = starboardThrustVisual > 1 ? 1 : starboardThrustVisual;
         starboardThrustVisual = starboardThrustVisual < 0 ? 0 : starboardThrustVisual;
-
+        portRotationVisual = portRotationVisual > 1 ? 1 : portRotationVisual;
+        portRotationVisual = portRotationVisual < 0 ? 0 : portRotationVisual;
+        starboardRotationVisual = starboardRotationVisual > 1 ? 1 : starboardRotationVisual;
+        starboardRotationVisual = starboardRotationVisual < 0 ? 0 : starboardRotationVisual;
     }
 
    [ClientRpc]

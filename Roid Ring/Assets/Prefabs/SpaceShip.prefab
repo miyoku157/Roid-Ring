@@ -1287,6 +1287,20 @@ MonoBehaviour:
   - {fileID: 1112341671083878}
   - {fileID: 1852462444079688}
   - {fileID: 1853411421919840}
+  portRotationThrusters:
+  - {fileID: 1650656560973530}
+  - {fileID: 1535236839956464}
+  - {fileID: 1994825010702312}
+  - {fileID: 1012518243674840}
+  - {fileID: 1764082819210422}
+  - {fileID: 1714183774673582}
+  starboardRotationThrusters:
+  - {fileID: 1470473572471952}
+  - {fileID: 1127499013038872}
+  - {fileID: 1060469342340698}
+  - {fileID: 1050751647273826}
+  - {fileID: 1050751647273826}
+  - {fileID: 1622936626463640}
 --- !u!114 &114986354751173602
 MonoBehaviour:
   m_ObjectHideFlags: 1
