@@ -1,1 +1,3 @@
-﻿using System.Collections; using System.Collections.Generic; using UnityEngine;  public class ShieldBehavior : MonoBehaviour {     public void setPos(Quaternion _qu, Vector3 _vec)     {         transform.position = _vec;         transform.rotation = _qu;     } }
+﻿using System.Collections; using System.Collections.Generic; using UnityEngine;  public class ShieldBehavior : MonoBehaviour {     private Damageable parentScript;      public void setPos(Quaternion _qu, Vector3 _vec)     {         transform.position = _vec;         transform.rotation = _qu;     }      public void SetParent(Damageable _parentScript)     {
+        parentScript = _parentScript;
+    } }
