@@ -308,7 +308,7 @@ public class SpaceshipController : NetworkBehaviour
     [Command]
     public void CmdSpawn()
     {
-        GameObject temp = Instantiate(projectile);
+        GameObject temp = (GameObject)Network.Instantiate(projectile, transform.GetChild(1).GetChild(0).position, Quaternion.LookRotation(transform.GetChild(1).GetChild(0).forward),0);
 
         if(isLocalPlayer)
         {
@@ -318,29 +318,7 @@ public class SpaceshipController : NetworkBehaviour
         {
             temp.layer = 14;
         }
-        
-        temp.transform.position = transform.GetChild(1).GetChild(0).position;
-        temp.transform.rotation = Quaternion.LookRotation(transform.GetChild(1).GetChild(0).forward);
-        NetworkServer.Spawn(temp);
-        RpcSpawn(temp);
-        Destroy(temp, 5.0f);
-    }
-
-    [ClientRpc]
-    void RpcSpawn(GameObject temp)
-    {
-        if (isLocalPlayer)
-        {
-            temp.layer = 13;
-        }
-        else
-        {
-            temp.layer = 14;
-        }
-
-        temp.transform.position = transform.GetChild(1).GetChild(0).position;
-        temp.transform.rotation = Quaternion.LookRotation(transform.GetChild(1).GetChild(0).forward);
-        NetworkServer.Spawn(temp);
+       
         Destroy(temp, 5.0f);
     }
 }
