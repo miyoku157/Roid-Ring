@@ -57,14 +57,17 @@ public class SpaceshipController : NetworkBehaviour
         transform.position = new Vector3(transform.position.x, -1.55f, transform.position.z);
         shieldScript.setPos(transform.rotation, shieldCoreTransform.position);
         cam.transform.rotation = Quaternion.Euler(90, 0, 0);
-
-        foreach(GameObject go in bowThrusters)
+        CmdEmitter();
+    }
+    void Emitter()
+    {
+        foreach (GameObject go in bowThrusters)
         {
             ps = go.GetComponent<ParticleSystem>();
             psMain = ps.main;
             psEmission = ps.emission;
 
-            if(bowThrustVisual < 0.1)
+            if (bowThrustVisual < 0.1)
             {
                 psEmission.enabled = false;
             }
@@ -75,13 +78,13 @@ public class SpaceshipController : NetworkBehaviour
             }
         }
 
-        foreach(GameObject go in sternThrusters)
+        foreach (GameObject go in sternThrusters)
         {
             ps = go.GetComponent<ParticleSystem>();
             psMain = ps.main;
             psEmission = ps.emission;
 
-            if(sternThrustVisual < 0.1)
+            if (sternThrustVisual < 0.1)
             {
                 psEmission.enabled = false;
             }
@@ -92,13 +95,13 @@ public class SpaceshipController : NetworkBehaviour
             }
         }
 
-        foreach(GameObject go in portThrusters)
+        foreach (GameObject go in portThrusters)
         {
             ps = go.GetComponent<ParticleSystem>();
             psMain = ps.main;
             psEmission = ps.emission;
 
-            if(portThrustVisual < 0.1)
+            if (portThrustVisual < 0.1)
             {
                 psEmission.enabled = false;
             }
@@ -109,13 +112,13 @@ public class SpaceshipController : NetworkBehaviour
             }
         }
 
-        foreach(GameObject go in starboardThrusters)
+        foreach (GameObject go in starboardThrusters)
         {
             ps = go.GetComponent<ParticleSystem>();
             psMain = ps.main;
             psEmission = ps.emission;
 
-            if(starboardThrustVisual < 0.1)
+            if (starboardThrustVisual < 0.1)
             {
                 psEmission.enabled = false;
             }
@@ -126,7 +129,17 @@ public class SpaceshipController : NetworkBehaviour
             }
         }
     }
-
+    [Command]
+    void CmdEmitter()
+    {
+        //Emitter();
+        RpcEmitter();
+    }
+    [ClientRpc]
+    void RpcEmitter()
+    {
+        Emitter();
+    }
     void FixedUpdate()
     {
         if(!isLocalPlayer) return;
